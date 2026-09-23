@@ -1,0 +1,3 @@
+/home/psvoboda@qres.local/Documents/GitHub/TraficSimulator/TraficSimulator/build/CMakeFiles/TraficSimulator.dir
+/home/psvoboda@qres.local/Documents/GitHub/TraficSimulator/TraficSimulator/build/CMakeFiles/edit_cache.dir
+/home/psvoboda@qres.local/Documents/GitHub/TraficSimulator/TraficSimulator/build/CMakeFiles/rebuild_cache.dir
