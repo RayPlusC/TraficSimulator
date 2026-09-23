@@ -35,10 +35,27 @@ Vector2D Car::getWorldPosition() const
     Vector2D startPosition = start->getPosition();
     Vector2D endPosition = end->getPosition();
 
+    // Direction along the road
     Vector2D direction =
         (endPosition - startPosition).normalized();
 
-    return startPosition + direction * roadPosition_;
+    // Vector pointing to the RIGHT side of the road
+    Vector2D right(
+        -direction.y,
+         direction.x
+    );
+
+    // Position along the road
+    Vector2D position =
+        startPosition +
+        direction * roadPosition_;
+
+    // Move from center of road to center of right lane
+    constexpr double laneWidth = 10.0;
+
+    position += right * (laneWidth / 2.0);
+
+    return position;
 }
 
 Direction Car::getDirection() const

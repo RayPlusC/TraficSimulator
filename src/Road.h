@@ -16,7 +16,7 @@ struct Lane {
     double length;
     bool forward{true};
     std::vector<std::weak_ptr<Car>> cars;
-
+    
     Lane(int laneId, double laneLength, bool isForward = true)
         : id(laneId), length(laneLength), forward(isForward) {}
 };

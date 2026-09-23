@@ -155,7 +155,7 @@ int main()
     car1->setCurrentRoad(road1.get());
     car1->setLaneIndex(1);
     car1->setRoadPosition(0.0);
-    car1->setMaxSpeed(13.89);
+    car1->setMaxSpeed(8.89);
     car1->setAcceleration(1.2);
 
     road1->addCar(car1);
@@ -171,7 +171,7 @@ int main()
     car2->setCurrentRoad(road2.get());
     car2->setLaneIndex(0);
     car2->setRoadPosition(0.0);
-    car2->setMaxSpeed(13.89);
+    car2->setMaxSpeed(5.89);
     car2->setAcceleration(1.0);
 
     road2->addCar(car2);
