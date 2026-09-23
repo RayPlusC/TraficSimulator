@@ -172,7 +172,7 @@ int main()
     car2->setLaneIndex(0);
     car2->setRoadPosition(0.0);
     car2->setMaxSpeed(13.89);
-    car2->setAcceleration(2.0);
+    car2->setAcceleration(1.0);
 
     road2->addCar(car2);
 
