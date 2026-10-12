@@ -75,7 +75,7 @@ void Simulation::applySimpleCarFollowing(Car& car) {
     }
 
     // Keep approximately 5 m of space.
-    if (closestDistance < 8.0) {
+    if (closestDistance < 15.0) {
         car.brake(0.2);
     } else {
         car.start();

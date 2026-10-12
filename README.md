@@ -19,7 +19,7 @@ Using CMake:
 ```bash
 cmake -S . -B build
 cmake --build build
-./build/traffic_sim
+./build/TraficSimulator
 ```
 
 Or compile directly:

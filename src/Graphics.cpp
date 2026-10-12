@@ -36,6 +36,11 @@ void Graphics::display()
     window.display();
 }
 
+void Graphics::setFramerateLimit(unsigned int limit)
+{
+    window.setFramerateLimit(limit);
+}
+
 void Graphics::drawPixel(float x, float y, sf::Color color)
 {
     sf::Vertex pixel(

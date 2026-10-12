@@ -92,10 +92,24 @@ const std::vector<std::shared_ptr<RoadSign>>& Road::getSigns() const {
     return signs_;
 }
 
-void Road::addCar(const std::shared_ptr<Car>& car) {
-    if (car) {
-        cars_.push_back(car);
-    }
+void Road::addCar(const std::shared_ptr<Car>& car)
+{
+    if (!car)
+        return;
+
+    // Don't add the same car twice.
+    auto it = std::find(
+        cars_.begin(),
+        cars_.end(),
+        car
+    );
+
+    if (it != cars_.end())
+        return;
+
+    cars_.push_back(car);
+
+    car->setCurrentRoad(this);
 }
 
 void Road::removeCar(int carId) {

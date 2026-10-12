@@ -15,7 +15,8 @@ public:
 
     void clear();
     void display();
-
+    void setFramerateLimit(unsigned int limit);
+    
     void drawPixel(float x, float y, sf::Color color = sf::Color::Black);
     void drawLine(float x1, float y1, float x2, float y2, sf::Color color = sf::Color::Black);
     void drawRoad(const Vector2D& start, const Vector2D& end);

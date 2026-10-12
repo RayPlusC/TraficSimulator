@@ -18,6 +18,7 @@ int main()
 
     Graphics graphics(800, 600, "Traffic Simulator");
 
+    graphics.setFramerateLimit(60);
 
     // --------------------------------------------------------
     // Build the road network
@@ -51,7 +52,7 @@ int main()
             "Main Street",
             crossroads1.get(),
             crossroads2.get(),
-            5,
+            50,
             2
         );
 
@@ -61,7 +62,7 @@ int main()
             "2nd Street",
             crossroads2.get(),
             crossroads3.get(),
-            20,
+            40,
             2
         );
     
@@ -71,7 +72,7 @@ int main()
             "3rd Street",
             crossroads3.get(),
             crossroads4.get(),
-            10,
+            60,
             2
         );
 
@@ -81,7 +82,7 @@ int main()
             "4th Street",
             crossroads4.get(),
             crossroads1.get(),
-            13.89,
+            40,
             2
         );
 
@@ -146,16 +147,15 @@ int main()
     // --------------------------------------------------------
 
     auto car1 =
-    std::make_shared<Car>(
-        1,
-        Vector2D(100, 290),
-        Direction::East
-    );
+        std::make_shared<Car>(
+            1,
+            Vector2D(100, 300),
+            Direction::East
+        );
 
-    car1->setCurrentRoad(road1.get());
-    car1->setLaneIndex(1);
+    car1->setLaneIndex(0);
     car1->setRoadPosition(0.0);
-    car1->setMaxSpeed(8.89);
+    car1->setMaxSpeed(120);
     car1->setAcceleration(1.2);
 
     road1->addCar(car1);
@@ -164,17 +164,44 @@ int main()
     auto car2 =
         std::make_shared<Car>(
             2,
-            Vector2D(700, 290),
-            Direction::South
+            Vector2D(400, 300),
+            Direction::East
         );
 
-    car2->setCurrentRoad(road2.get());
     car2->setLaneIndex(0);
-    car2->setRoadPosition(0.0);
-    car2->setMaxSpeed(5.89);
+    car2->setRoadPosition(300.0);
+    car2->setMaxSpeed(130);
     car2->setAcceleration(1.0);
 
-    road2->addCar(car2);
+    road1->addCar(car2);
+
+    auto car3 =
+        std::make_shared<Car>(
+            3,
+            Vector2D(600, 300),
+            Direction::East
+        );
+
+    car3->setLaneIndex(0);
+    car3->setRoadPosition(600.0);
+    car3->setMaxSpeed(140);
+    car3->setAcceleration(1.6);
+
+    road1->addCar(car3);
+
+    auto car4 =
+        std::make_shared<Car>(
+            3,
+            Vector2D(600, 300),
+            Direction::East
+        );
+
+    car4->setLaneIndex(0);
+    car4->setRoadPosition(600.0);
+    car4->setMaxSpeed(150);
+    car4->setAcceleration(1.6);
+
+    road1->addCar(car4);
 
     // --------------------------------------------------------
     // Simulation
@@ -194,6 +221,8 @@ int main()
 
     simulation.addCar(car1);
     simulation.addCar(car2);
+    simulation.addCar(car3);
+    simulation.addCar(car4);
 
 
     // --------------------------------------------------------
@@ -248,8 +277,17 @@ int main()
 
         graphics.drawCar(car1.get());
         graphics.drawCar(car2.get());
+        graphics.drawCar(car3.get());
+        graphics.drawCar(car4.get());
 
         graphics.display();
+
+        std::system("clear");
+        std::cout << car1->getSpeed() << " | " << std::endl;
+        std::cout << car2->getSpeed() << " | " << std::endl;
+        std::cout << car3->getSpeed() << " | " << std::endl;
+        std::cout << car4->getSpeed() << " | " << std::endl;
+        
     }
 
 
