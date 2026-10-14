@@ -177,11 +177,11 @@ void Graphics::drawCrossroad(
 
 void Graphics::drawCar(const Car* car)
 {
-    if (car == nullptr)
+    if (!car)
         return;
 
-    Vector2D position = car->getWorldPosition();
-    Direction direction = car->getDirection();
+    const Vector2D position = car->getWorldPosition();
+    const Direction direction = car->getDirection();
 
     float width = 10.0f;
     float height = 5.0f;
@@ -192,20 +192,14 @@ void Graphics::drawCar(const Car* car)
         std::swap(width, height);
     }
 
-    for (int x = 0; x < width; ++x)
-    {
-        for (int y = 0; y < height; ++y)
-        {
-            drawPixel(
-                position.x + x - width / 2,
-                position.y + y - height / 2,
-                sf::Color::Red
-            );
-        }
-    }
-}
+    sf::RectangleShape shape(sf::Vector2f(width, height));
 
-sf::RenderWindow& Graphics::getWindow()
-{
-    return window;
+    shape.setFillColor(sf::Color::Red);
+    shape.setOrigin(width / 2.0f, height / 2.0f);
+    shape.setPosition(
+        static_cast<float>(position.x),
+        static_cast<float>(position.y)
+    );
+
+    window.draw(shape);
 }

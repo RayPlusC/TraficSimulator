@@ -21,7 +21,10 @@ public:
 
     void setCurrentRoad(Road* road);
     Road* getCurrentRoad() const;
+    void setRoute(const std::shared_ptr<Route>& route);
 
+    bool isTravellingForward() const;
+    
     void moveToNextRoad();
 
     bool canOvertake() const;
@@ -53,7 +56,6 @@ public:
     void stop();
     void start();
 
-    void setRoute(std::shared_ptr<Route> route);
     Route* getRoute() const;
 
     void accelerate(double deltaTime);
@@ -82,5 +84,5 @@ private:
 
     bool stopped_ = false;
 
-    std::shared_ptr<Route> route_;
+        std::shared_ptr<Route> route_;
 };

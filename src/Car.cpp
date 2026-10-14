@@ -1,8 +1,11 @@
 #include "Car.h"
 #include "Road.h"
 #include "Crossroad.h"
-
+#include "Route.h"
+#include <cmath>
+#include <utility>
 #include <algorithm>
+#include <iostream>
 
 Car::Car(int id, Vector2D position, Direction direction)
     : id_(id),
@@ -23,125 +26,99 @@ void Car::setPosition(Vector2D position) {
 
 Vector2D Car::getWorldPosition() const
 {
-    if (currentRoad_ == nullptr)
+    if (!currentRoad_)
         return position_;
 
     Crossroad* start = currentRoad_->getStart();
     Crossroad* end = currentRoad_->getEnd();
 
-    if (start == nullptr || end == nullptr)
+    if (!start || !end)
         return position_;
 
-    Vector2D startPosition = start->getPosition();
-    Vector2D endPosition = end->getPosition();
-
     Vector2D roadDirection =
-        (endPosition - startPosition).normalized();
+        end->getPosition() - start->getPosition();
 
-    Vector2D right(
-        -roadDirection.y,
-         roadDirection.x
-    );
+    const double length = roadDirection.length();
 
-    // Position along the road.
+    if (length <= 0.0)
+        return start->getPosition();
+
+    roadDirection = roadDirection * (1.0 / length);
+
+    const bool forward = isTravellingForward();
+
+    const Vector2D origin =
+        forward ? start->getPosition() : end->getPosition();
+
+    const Vector2D travelDirection =
+        forward ? roadDirection : roadDirection * -1.0;
+
     Vector2D worldPosition =
-        startPosition +
-        roadDirection * roadPosition_;
+        origin + travelDirection * roadPosition_;
 
-    // ---------------------------------------------------------
-    // Lane positioning
-    //
-    // lane 0 = right lane
-    // lane 1 = left lane
-    //
-    // For a two-lane road:
-    //
-    //        lane 1
-    //          |
-    // road ----+---->
-    //          |
-    //        lane 0
-    //
-    // ---------------------------------------------------------
+    // A 20-pixel road has two 10-pixel lanes.
+    // Place each car in the center of its lane.
+    const Vector2D right(
+        -travelDirection.y,
+         travelDirection.x
+    );
 
     constexpr double laneWidth = 10.0;
 
-    const std::size_t laneCount =
-        currentRoad_->getLaneCount();
+    const double laneOffset =
+        (static_cast<double>(laneIndex_) - 0.5) * laneWidth;
 
-    const double roadWidth =
-        static_cast<double>(laneCount) * laneWidth;
-
-    const double laneCenter =
-        (static_cast<double>(laneIndex_) + 0.5) * laneWidth;
-
-    // lane 0 is on the right side of the road.
-    const double offsetFromCenter =
-        roadWidth / 2.0 - laneCenter;
-
-    worldPosition +=
-        right * offsetFromCenter;
+    worldPosition = worldPosition + right * laneOffset;
 
     return worldPosition;
 }
 
 Direction Car::getDirection() const
 {
-    if (currentRoad_ == nullptr)
-        return direction_;
+    if (!currentRoad_)
+        return Direction::East;
 
-    Vector2D start =
-        currentRoad_->getStart()->getPosition();
+    Crossroad* start = currentRoad_->getStart();
+    Crossroad* end = currentRoad_->getEnd();
 
-    Vector2D end =
-        currentRoad_->getEnd()->getPosition();
+    if (!start || !end)
+        return Direction::East;
 
-    Vector2D delta = end - start;
+    Vector2D delta = end->getPosition() - start->getPosition();
+
+    if (!isTravellingForward())
+        delta = delta * -1.0;
 
     if (std::abs(delta.x) > std::abs(delta.y))
-    {
-        return delta.x > 0
-            ? Direction::East
-            : Direction::West;
-    }
+        return delta.x >= 0.0 ? Direction::East : Direction::West;
 
-    return delta.y > 0
-        ? Direction::South
-        : Direction::North;
+    return delta.y >= 0.0 ? Direction::South : Direction::North;
 }
 
 std::shared_ptr<Car> Car::getCarAhead() const
 {
-    if (currentRoad_ == nullptr)
+    if (!currentRoad_)
         return nullptr;
 
     constexpr double detectionDistance = 150.0;
 
-    std::shared_ptr<Car> closestCar = nullptr;
+    std::shared_ptr<Car> closestCar;
     double closestDistance = detectionDistance;
 
     for (const auto& other : currentRoad_->getCars())
     {
-        if (!other)
+        if (!other || other.get() == this)
             continue;
 
-        // Ignore myself
-        if (other.get() == this)
-            continue;
-
-        // Ignore cars in another lane
         if (other->getLaneIndex() != laneIndex_)
             continue;
 
-        // Distance along this road
-        double distance =
+        const double distance =
             other->getRoadPosition() - roadPosition_;
 
-        // Car is behind us
         if (distance <= 0.0)
             continue;
 
-        // Find closest car ahead
         if (distance < closestDistance)
         {
             closestDistance = distance;
@@ -243,63 +220,113 @@ Road* Car::getCurrentRoad() const {
     return currentRoad_;
 }
 
-void Car::moveToNextRoad()
+bool Car::isTravellingForward() const
 {
-    if (currentRoad_ == nullptr)
-        return;
+    if (!currentRoad_)
+        return true;
 
-    Crossroad* destination =
-        currentRoad_->getEnd();
+    const int lane = getLaneIndex();
 
-    if (destination == nullptr)
-        return;
-
-    Road* oldRoad = currentRoad_;
-    Road* nextRoad = nullptr;
-
-    // Find the next road connected to the destination.
-    for (Road* road : destination->getRoads())
+    if (lane < 0 ||
+        lane >= static_cast<int>(currentRoad_->getLaneCount()))
     {
-        if (road == nullptr)
-            continue;
-
-        if (road == oldRoad)
-            continue;
-
-        nextRoad = road;
-        break;
+        return true;
     }
 
-    // No next road.
-    if (nextRoad == nullptr)
+    const Lane* laneInfo =
+        currentRoad_->getLane(static_cast<std::size_t>(lane));
+
+    return laneInfo ? laneInfo->forward : true;
+}
+
+void Car::moveToNextRoad()
+{
+    if (!currentRoad_)
         return;
 
-    // Remove the car from the road it just left.
-    oldRoad->removeCar(id_);
+    Road* previousRoad = currentRoad_;
+    const bool forward = isTravellingForward();
 
-    // Reset position on the new road.
-    roadPosition_ = 0.0;
+    Crossroad* reachedCrossroad =
+        forward ? previousRoad->getEnd()
+                : previousRoad->getStart();
 
-    // Keep the lane index valid for the new road.
-    if (nextRoad->getLaneCount() > 0)
+    if (!reachedCrossroad)
     {
-        laneIndex_ = std::clamp(
-            laneIndex_,
-            0,
-            static_cast<int>(nextRoad->getLaneCount()) - 1
-        );
+        speed_ = 0.0;
+        stopped_ = true;
+        return;
+    }
+
+    std::cout << "Car " << id_
+              << " reached crossroad " << reachedCrossroad->getId()
+              << " from road " << previousRoad->getId() << '\n';
+
+    // The route determines which road the car should take next.
+    Road* nextRoad = route_ ? route_->getNextRoad() : nullptr;
+
+    // Verify that the requested road actually connects to this crossroad.
+    if (nextRoad &&
+        (nextRoad == previousRoad ||
+         (nextRoad->getStart() != reachedCrossroad &&
+          nextRoad->getEnd() != reachedCrossroad)))
+    {
+        std::cout << "Invalid next road in route for car "
+                  << id_ << '\n';
+
+        nextRoad = nullptr;
+    }
+
+    // Don't arbitrarily choose a different road if the route is invalid.
+    if (!nextRoad)
+    {
+        std::cout << "Car " << id_
+                  << " has no valid next road at crossroad "
+                  << reachedCrossroad->getId() << '\n';
+
+        speed_ = 0.0;
+        stopped_ = true;
+        return;
+    }
+
+    // Remove the car from its previous road.
+    previousRoad->removeCar(id_);
+
+    // Enter the new road from the endpoint connected to the crossroad.
+    currentRoad_ = nextRoad;
+
+    if (nextRoad->getStart() == reachedCrossroad)
+    {
+        laneIndex_ = 0; // Start -> end
     }
     else
     {
-        laneIndex_ = 0;
+        laneIndex_ = 1; // End -> start
     }
 
-    // Add the car to the new road.
+    roadPosition_ = 0.0;
+    position_ = reachedCrossroad->getPosition();
+
     nextRoad->addCar(shared_from_this());
+
+    route_->advance();
+
+    stopped_ = false;
+
+    const Vector2D worldPosition = getWorldPosition();
+
+    std::cout << "Car " << id_
+              << " entered road " << nextRoad->getId()
+              << " from crossroad " << reachedCrossroad->getId()
+              << ", lane " << laneIndex_
+              << ", world position ("
+              << worldPosition.x << ", "
+              << worldPosition.y << ")\n";
 }
 
-void Car::setRoute(std::shared_ptr<Route> route) {
-    route_ = std::move(route);
+void Car::setRoute(const std::shared_ptr<Route>& route)
+{
+    route_ = route;
 }
 
 Route* Car::getRoute() const {
@@ -356,32 +383,25 @@ void Car::update(double deltaTime)
     if (carAhead && canOvertake())
     {
         overtake();
+
     }
 
     // ---------------------------------------------------------
     // Check whether we have passed the overtaken car.
     // ---------------------------------------------------------
 
+    // If we are already overtaking, finish the manoeuvre.
     if (overtaking_)
     {
-        auto overtakenCar = overtakenCar_.lock();
+        if (canReturnToRight())
+            returnToRightLane();
+    }
+    else
+    {
+        auto carAhead = getCarAhead();
 
-        if (!overtakenCar)
-        {
-            overtaking_ = false;
-        }
-        else
-        {
-            // Overtaken car is now behind us.
-            if (overtakenCar->getRoadPosition() < roadPosition_)
-            {
-                // Move one lane toward the right when safe.
-                if (canReturnToRight())
-                {
-                    returnToRightLane();
-                }
-            }
-        }
+        if (carAhead && canOvertake())
+            overtake();
     }
 
     // ---------------------------------------------------------
@@ -532,33 +552,147 @@ bool Car::isLaneClear(int lane) const
 
 bool Car::canOvertake() const
 {
-    if (currentRoad_ == nullptr)
+    if (!currentRoad_ || stopped_ || overtaking_)
         return false;
 
-    const int mostLeftLane =
-        static_cast<int>(
-            currentRoad_->getLaneCount()
-        ) - 1;
-
-    // No multiple lanes.
-    if (mostLeftLane <= 0)
+    // We need two lanes for overtaking.
+    if (currentRoad_->getLaneCount() < 2)
         return false;
 
-    // Already at the leftmost lane.
-    if (laneIndex_ >= mostLeftLane)
+    const int currentLane = getLaneIndex();
+    const int oppositeLane = 1 - currentLane;
+
+    const Lane* currentLaneInfo =
+        currentRoad_->getLane(static_cast<std::size_t>(currentLane));
+
+    const Lane* oppositeLaneInfo =
+        currentRoad_->getLane(static_cast<std::size_t>(oppositeLane));
+
+    if (!currentLaneInfo || !oppositeLaneInfo)
         return false;
 
+    // Overtaking requires an actual lane travelling in the
+    // opposite direction.
+    if (currentLaneInfo->forward == oppositeLaneInfo->forward)
+        return false;
+
+    // Find the slower car ahead in our current lane.
     auto carAhead = getCarAhead();
 
     if (!carAhead)
         return false;
 
-    // Only overtake a slower vehicle.
-    if (carAhead->getSpeed() >= speed_)
+    if (carAhead->getCurrentRoad() != currentRoad_)
         return false;
 
-    // There must be enough space in the lane to our left.
-    if (!isLaneClear(laneIndex_ + 1))
+    // There must be a speed advantage.
+    const double mySpeed = getSpeed();
+    const double targetSpeed = carAhead->getSpeed();
+
+    if (getMaxSpeed() <= targetSpeed + 1.0)
+        return false;
+
+    constexpr double carLength = 15.0;
+    constexpr double safetyGap = 15.0;
+    constexpr double minSpeed = 1.0;
+
+    // Estimate the distance needed to pass the slower car.
+    const double distanceToTarget =
+        carAhead->getRoadPosition() - getRoadPosition();
+
+    if (distanceToTarget <= 0.0)
+        return false;
+
+    const double passingDistance =
+        distanceToTarget + carLength + 2.0 * safetyGap;
+
+    // Estimate the speed we can achieve during the manoeuvre.
+    const double roadSpeedLimit = currentRoad_->getSpeedLimit();
+
+    const double passingSpeed = std::min(
+        getMaxSpeed(),
+        std::max(mySpeed, targetSpeed + 5.0)
+    );
+
+    const double effectiveSpeed = std::min(
+        passingSpeed,
+        roadSpeedLimit
+    );
+
+    if (effectiveSpeed <= minSpeed)
+        return false;
+
+    // Conservative estimate: how long will the manoeuvre take?
+    const double manoeuvreTime =
+        passingDistance / effectiveSpeed;
+
+    // Convert the car's entry-relative position into a common
+    // coordinate measured from the road's start.
+    const double roadLength = currentRoad_->getLength();
+
+    const double myRoadCoordinate =
+        isTravellingForward()
+            ? getRoadPosition()
+            : roadLength - getRoadPosition();
+
+    // Required space ahead of us for the whole manoeuvre.
+    constexpr double extraDistance = 30.0;
+
+    const double requiredDistance =
+        passingDistance + extraDistance;
+
+    // Check all cars travelling in the opposite direction.
+    for (const auto& other : currentRoad_->getCars())
+    {
+        if (!other || other.get() == this)
+            continue;
+
+        if (other->getLaneIndex() != oppositeLane)
+            continue;
+
+        // Ignore cars travelling in the same direction as us.
+        if (other->isTravellingForward() == isTravellingForward())
+            continue;
+
+        const double otherCoordinate =
+            other->isTravellingForward()
+                ? other->getRoadPosition()
+                : roadLength - other->getRoadPosition();
+
+        // Distance from us to the oncoming car, measured in
+        // our direction of travel.
+        const double distanceToOncoming =
+            (otherCoordinate - myRoadCoordinate) *
+            (isTravellingForward() ? 1.0 : -1.0);
+
+        // This car is behind us, or is not relevant to the
+        // upcoming manoeuvre.
+        if (distanceToOncoming <= 0.0)
+            continue;
+
+        // Account for both cars moving towards each other.
+        const double closingSpeed =
+            effectiveSpeed + other->getSpeed();
+
+        const double distanceNeeded =
+            closingSpeed * manoeuvreTime +
+            extraDistance + carLength;
+
+        // Not enough room to finish overtaking before the
+        // oncoming car reaches the conflict area.
+        if (distanceToOncoming < std::max(
+                requiredDistance, distanceNeeded))
+        {
+            return false;
+        }
+    }
+
+    // Check that there is enough room to return to our lane
+    // before reaching the end of the road.
+    const double remainingRoad =
+        roadLength - getRoadPosition();
+
+    if (remainingRoad < requiredDistance)
         return false;
 
     return true;
@@ -569,29 +703,66 @@ void Car::overtake()
     if (!canOvertake())
         return;
 
-    auto carAhead = getCarAhead();
+    const int oppositeLane = 1 - getLaneIndex();
 
-    if (!carAhead)
+    // Store the car we intend to pass.
+    auto target = getCarAhead();
+
+    if (!target)
         return;
 
-    overtakenCar_ = carAhead;
-
-    laneIndex_++;
+    setLaneIndex(oppositeLane);
 
     overtaking_ = true;
+    overtakenCar_ = target;
 }
 
 bool Car::canReturnToRight() const
 {
-    if (!overtaking_)
+    if (!currentRoad_ || !overtaking_)
         return false;
 
-    if (laneIndex_ <= 0)
+    auto target = overtakenCar_.lock();
+
+    if (!target)
+        return true;
+
+    if (target->getCurrentRoad() != currentRoad_)
+        return true;
+
+    // The target must be behind us in the same travel direction.
+    const double gap =
+        getRoadPosition() - target->getRoadPosition();
+
+    constexpr double carLength = 15.0;
+    constexpr double safetyGap = 15.0;
+
+    if (gap < carLength + safetyGap)
         return false;
 
-    // We only return if the lane immediately
-    // to our right is clear.
-    return isLaneClear(laneIndex_ - 1);
+    // Check for another car in the lane we want to re-enter.
+    const int originalLane =
+        isTravellingForward() ? 0 : 1;
+
+    for (const auto& other : currentRoad_->getCars())
+    {
+        if (!other || other.get() == this ||
+            other.get() == target.get())
+        {
+            continue;
+        }
+
+        if (other->getLaneIndex() != originalLane)
+            continue;
+
+        const double distance =
+            other->getRoadPosition() - getRoadPosition();
+
+        if (std::abs(distance) < carLength + safetyGap)
+            return false;
+    }
+
+    return true;
 }
 
 void Car::returnToRightLane()
@@ -599,8 +770,11 @@ void Car::returnToRightLane()
     if (!canReturnToRight())
         return;
 
-    laneIndex_--;
+    const int originalLane =
+        isTravellingForward() ? 0 : 1;
 
-    if (laneIndex_ == 0)
-        overtaking_ = false;
+    setLaneIndex(originalLane);
+
+    overtaking_ = false;
+    overtakenCar_.reset();
 }

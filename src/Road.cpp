@@ -10,8 +10,7 @@ Road::Road(
     std::string name,
     Crossroad* start,
     Crossroad* end,
-    double speedLimit,
-    int laneCount
+    double speedLimit
 )
     : id_(id),
       name_(std::move(name)),
@@ -28,12 +27,8 @@ Road::Road(
         length_ = difference.length();
     }
 
-    laneCount = std::max(1, laneCount);
-
-    for (int i = 0; i < laneCount; ++i)
-    {
-        lanes_.emplace_back(i, length_);
-    }
+    lanes_.emplace_back(0, length_, true);   // start -> end
+    lanes_.emplace_back(1, length_, false);  // end -> start
 }
 
 int Road::getId() const {

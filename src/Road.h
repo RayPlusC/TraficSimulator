@@ -10,26 +10,33 @@
 
 class Car;
 class Crossroad;
+class RoadSign;
 
-struct Lane {
+struct Lane
+{
     int id;
     double length;
-    bool forward{true};
+    bool forward;
+
     std::vector<std::weak_ptr<Car>> cars;
-    
-    Lane(int laneId, double laneLength, bool isForward = true)
-        : id(laneId), length(laneLength), forward(isForward) {}
+
+    Lane(int laneId, double laneLength, bool isForward)
+        : id(laneId),
+          length(laneLength),
+          forward(isForward)
+    {
+    }
 };
 
-class Road {
+class Road
+{
 public:
     Road(
         int id,
         std::string name,
         Crossroad* start,
         Crossroad* end,
-        double speedLimit,
-        int laneCount = 1
+        double speedLimit
     );
 
     int getId() const;
@@ -40,10 +47,10 @@ public:
 
     double getLength() const;
     double getSpeedLimit() const;
-
     void setSpeedLimit(double speedLimit);
 
     std::size_t getLaneCount() const;
+
     Lane* getLane(std::size_t index);
     const Lane* getLane(std::size_t index) const;
 
@@ -52,6 +59,7 @@ public:
 
     void addCar(const std::shared_ptr<Car>& car);
     void removeCar(int carId);
+
     const std::vector<std::shared_ptr<Car>>& getCars() const;
 
 private:

@@ -6,6 +6,7 @@ CMakeFiles/TraficSimulator.dir/src/Car.cpp.o: /home/psvoboda@qres.local/Document
   /home/psvoboda@qres.local/Documents/GitHub/TraficSimulator/TraficSimulator/src/Crossroad.h \
   /home/psvoboda@qres.local/Documents/GitHub/TraficSimulator/TraficSimulator/src/Road.h \
   /home/psvoboda@qres.local/Documents/GitHub/TraficSimulator/TraficSimulator/src/RoadSign.h \
+  /home/psvoboda@qres.local/Documents/GitHub/TraficSimulator/TraficSimulator/src/Route.h \
   /home/psvoboda@qres.local/Documents/GitHub/TraficSimulator/TraficSimulator/src/TrafficLight.h \
   /home/psvoboda@qres.local/Documents/GitHub/TraficSimulator/TraficSimulator/src/TrafficTypes.h \
   /home/psvoboda@qres.local/Documents/GitHub/TraficSimulator/TraficSimulator/src/Vector2D.h \
@@ -23,6 +24,8 @@ CMakeFiles/TraficSimulator.dir/src/Car.cpp.o: /home/psvoboda@qres.local/Document
   /usr/include/c++/13/bits/allocator.h \
   /usr/include/c++/13/bits/atomic_base.h \
   /usr/include/c++/13/bits/atomic_lockfree_defines.h \
+  /usr/include/c++/13/bits/basic_ios.h \
+  /usr/include/c++/13/bits/basic_ios.tcc \
   /usr/include/c++/13/bits/basic_string.h \
   /usr/include/c++/13/bits/basic_string.tcc \
   /usr/include/c++/13/bits/char_traits.h \
@@ -38,12 +41,19 @@ CMakeFiles/TraficSimulator.dir/src/Car.cpp.o: /home/psvoboda@qres.local/Document
   /usr/include/c++/13/bits/functional_hash.h \
   /usr/include/c++/13/bits/hash_bytes.h \
   /usr/include/c++/13/bits/invoke.h \
+  /usr/include/c++/13/bits/ios_base.h \
+  /usr/include/c++/13/bits/istream.tcc \
+  /usr/include/c++/13/bits/locale_classes.h \
+  /usr/include/c++/13/bits/locale_classes.tcc \
+  /usr/include/c++/13/bits/locale_facets.h \
+  /usr/include/c++/13/bits/locale_facets.tcc \
   /usr/include/c++/13/bits/localefwd.h \
   /usr/include/c++/13/bits/memory_resource.h \
   /usr/include/c++/13/bits/memoryfwd.h \
   /usr/include/c++/13/bits/move.h \
   /usr/include/c++/13/bits/nested_exception.h \
   /usr/include/c++/13/bits/new_allocator.h \
+  /usr/include/c++/13/bits/ostream.tcc \
   /usr/include/c++/13/bits/ostream_insert.h \
   /usr/include/c++/13/bits/postypes.h \
   /usr/include/c++/13/bits/predefined_ops.h \
@@ -67,9 +77,12 @@ CMakeFiles/TraficSimulator.dir/src/Car.cpp.o: /home/psvoboda@qres.local/Document
   /usr/include/c++/13/bits/stl_iterator_base_types.h \
   /usr/include/c++/13/bits/stl_pair.h \
   /usr/include/c++/13/bits/stl_raw_storage_iter.h \
+  /usr/include/c++/13/bits/stl_relops.h \
   /usr/include/c++/13/bits/stl_tempbuf.h \
   /usr/include/c++/13/bits/stl_uninitialized.h \
   /usr/include/c++/13/bits/stl_vector.h \
+  /usr/include/c++/13/bits/streambuf.tcc \
+  /usr/include/c++/13/bits/streambuf_iterator.h \
   /usr/include/c++/13/bits/string_view.tcc \
   /usr/include/c++/13/bits/stringfwd.h \
   /usr/include/c++/13/bits/uniform_int_dist.h \
@@ -86,6 +99,7 @@ CMakeFiles/TraficSimulator.dir/src/Car.cpp.o: /home/psvoboda@qres.local/Document
   /usr/include/c++/13/cstdio \
   /usr/include/c++/13/cstdlib \
   /usr/include/c++/13/cwchar \
+  /usr/include/c++/13/cwctype \
   /usr/include/c++/13/debug/assertions.h \
   /usr/include/c++/13/debug/debug.h \
   /usr/include/c++/13/exception \
@@ -97,16 +111,23 @@ CMakeFiles/TraficSimulator.dir/src/Car.cpp.o: /home/psvoboda@qres.local/Document
   /usr/include/c++/13/ext/string_conversions.h \
   /usr/include/c++/13/ext/type_traits.h \
   /usr/include/c++/13/initializer_list \
+  /usr/include/c++/13/ios \
   /usr/include/c++/13/iosfwd \
+  /usr/include/c++/13/iostream \
+  /usr/include/c++/13/istream \
   /usr/include/c++/13/limits \
   /usr/include/c++/13/memory \
   /usr/include/c++/13/new \
+  /usr/include/c++/13/ostream \
   /usr/include/c++/13/pstl/execution_defs.h \
   /usr/include/c++/13/pstl/glue_algorithm_defs.h \
   /usr/include/c++/13/pstl/glue_memory_defs.h \
   /usr/include/c++/13/pstl/pstl_config.h \
+  /usr/include/c++/13/stdexcept \
+  /usr/include/c++/13/streambuf \
   /usr/include/c++/13/string \
   /usr/include/c++/13/string_view \
+  /usr/include/c++/13/system_error \
   /usr/include/c++/13/tr1/bessel_function.tcc \
   /usr/include/c++/13/tr1/beta_function.tcc \
   /usr/include/c++/13/tr1/ell_integral.tcc \
@@ -122,6 +143,7 @@ CMakeFiles/TraficSimulator.dir/src/Car.cpp.o: /home/psvoboda@qres.local/Document
   /usr/include/c++/13/tuple \
   /usr/include/c++/13/type_traits \
   /usr/include/c++/13/typeinfo \
+  /usr/include/c++/13/utility \
   /usr/include/c++/13/vector \
   /usr/include/ctype.h \
   /usr/include/endian.h \
@@ -139,6 +161,7 @@ CMakeFiles/TraficSimulator.dir/src/Car.cpp.o: /home/psvoboda@qres.local/Document
   /usr/include/stdlib.h \
   /usr/include/time.h \
   /usr/include/wchar.h \
+  /usr/include/wctype.h \
   /usr/include/x86_64-linux-gnu/asm/errno.h \
   /usr/include/x86_64-linux-gnu/bits/atomic_wide_counter.h \
   /usr/include/x86_64-linux-gnu/bits/byteswap.h \
@@ -208,12 +231,16 @@ CMakeFiles/TraficSimulator.dir/src/Car.cpp.o: /home/psvoboda@qres.local/Document
   /usr/include/x86_64-linux-gnu/bits/waitflags.h \
   /usr/include/x86_64-linux-gnu/bits/waitstatus.h \
   /usr/include/x86_64-linux-gnu/bits/wchar.h \
+  /usr/include/x86_64-linux-gnu/bits/wctype-wchar.h \
   /usr/include/x86_64-linux-gnu/bits/wordsize.h \
   /usr/include/x86_64-linux-gnu/c++/13/bits/atomic_word.h \
   /usr/include/x86_64-linux-gnu/c++/13/bits/c++allocator.h \
   /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \
   /usr/include/x86_64-linux-gnu/c++/13/bits/c++locale.h \
   /usr/include/x86_64-linux-gnu/c++/13/bits/cpu_defines.h \
+  /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_base.h \
+  /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_inline.h \
+  /usr/include/x86_64-linux-gnu/c++/13/bits/error_constants.h \
   /usr/include/x86_64-linux-gnu/c++/13/bits/gthr-default.h \
   /usr/include/x86_64-linux-gnu/c++/13/bits/gthr.h \
   /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h \
@@ -1838,6 +1865,7 @@ CMakeFiles/TraficSimulator.dir/src/main.cpp.o: /home/psvoboda@qres.local/Documen
   /home/psvoboda@qres.local/Documents/GitHub/TraficSimulator/TraficSimulator/src/Graphics.h \
   /home/psvoboda@qres.local/Documents/GitHub/TraficSimulator/TraficSimulator/src/Road.h \
   /home/psvoboda@qres.local/Documents/GitHub/TraficSimulator/TraficSimulator/src/RoadSign.h \
+  /home/psvoboda@qres.local/Documents/GitHub/TraficSimulator/TraficSimulator/src/Route.h \
   /home/psvoboda@qres.local/Documents/GitHub/TraficSimulator/TraficSimulator/src/Simulation.h \
   /home/psvoboda@qres.local/Documents/GitHub/TraficSimulator/TraficSimulator/src/TrafficLight.h \
   /home/psvoboda@qres.local/Documents/GitHub/TraficSimulator/TraficSimulator/src/TrafficTypes.h \
@@ -2178,27 +2206,11 @@ CMakeFiles/TraficSimulator.dir/src/main.cpp.o: /home/psvoboda@qres.local/Documen
   /usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h
 
 
-/usr/include/c++/13/istream:
-
-/usr/include/c++/13/iostream:
-
 /home/psvoboda@qres.local/Documents/GitHub/TraficSimulator/TraficSimulator/src/Route.cpp:
 
 /usr/include/x86_64-linux-gnu/c++/13/bits/messages_members.h:
 
-/usr/include/x86_64-linux-gnu/c++/13/bits/error_constants.h:
-
-/usr/include/x86_64-linux-gnu/bits/wctype-wchar.h:
-
-/usr/include/c++/13/system_error:
-
-/usr/include/c++/13/ostream:
-
 /usr/include/c++/13/locale:
-
-/usr/include/c++/13/ios:
-
-/usr/include/c++/13/cwctype:
 
 /usr/include/c++/13/ctime:
 
@@ -2206,27 +2218,9 @@ CMakeFiles/TraficSimulator.dir/src/main.cpp.o: /home/psvoboda@qres.local/Documen
 
 /usr/include/c++/13/bits/stl_map.h:
 
-/usr/include/c++/13/bits/ostream.tcc:
-
 /usr/include/c++/13/bits/locale_facets_nonio.h:
 
-/usr/include/c++/13/bits/locale_facets.tcc:
-
-/usr/include/c++/13/bits/locale_facets.h:
-
-/usr/include/c++/13/bits/istream.tcc:
-
-/usr/include/c++/13/bits/locale_conv.h:
-
-/usr/include/c++/13/iterator:
-
-/usr/include/c++/13/bits/ios_base.h:
-
 /usr/include/c++/13/bits/erase_if.h:
-
-/usr/include/c++/13/bits/basic_ios.tcc:
-
-/usr/include/c++/13/bits/basic_ios.h:
 
 /usr/include/SFML/Window/WindowStyle.hpp:
 
@@ -2278,19 +2272,11 @@ CMakeFiles/TraficSimulator.dir/src/main.cpp.o: /home/psvoboda@qres.local/Documen
 
 /usr/include/SFML/System/String.hpp:
 
-/usr/include/c++/13/stdexcept:
-
-/usr/include/SFML/System/NonCopyable.hpp:
-
 /usr/include/SFML/System/Mutex.hpp:
 
 /usr/include/SFML/System/MemoryInputStream.hpp:
 
 /usr/include/SFML/System/Lock.hpp:
-
-/usr/include/x86_64-linux-gnu/c++/13/bits/ctype_base.h:
-
-/usr/include/SFML/System/InputStream.hpp:
 
 /usr/include/SFML/System/Export.hpp:
 
@@ -2298,43 +2284,57 @@ CMakeFiles/TraficSimulator.dir/src/main.cpp.o: /home/psvoboda@qres.local/Documen
 
 /usr/include/SFML/Graphics/VertexBuffer.hpp:
 
+/usr/include/SFML/Graphics/Vertex.hpp:
+
+/usr/include/SFML/Graphics/View.hpp:
+
+/usr/include/SFML/Graphics/Transformable.hpp:
+
+/usr/include/SFML/Graphics/Sprite.hpp:
+
+/usr/include/SFML/Graphics/Shape.hpp:
+
+/usr/include/SFML/Graphics/Shader.hpp:
+
+/usr/include/SFML/Graphics/RenderWindow.hpp:
+
+/usr/include/SFML/Graphics/RenderTexture.hpp:
+
+/usr/include/SFML/Graphics/RenderTarget.hpp:
+
+/usr/include/SFML/Graphics/RenderStates.hpp:
+
+/usr/include/SFML/Graphics/Rect.inl:
+
+/usr/include/SFML/Graphics/Rect.hpp:
+
+/usr/include/SFML/Graphics/Image.hpp:
+
+/usr/include/c++/13/bits/locale_facets_nonio.tcc:
+
+/usr/include/SFML/Graphics/Glsl.hpp:
+
 /usr/include/SFML/Window/VideoMode.hpp:
 
 /usr/include/SFML/Graphics/Font.hpp:
 
-/usr/include/ctype.h:
+/usr/include/SFML/Graphics/Export.hpp:
 
-/usr/include/c++/13/typeinfo:
+/usr/include/SFML/Graphics/Drawable.hpp:
 
-/usr/include/c++/13/bits/cxxabi_init_exception.h:
+/usr/include/SFML/Graphics/ConvexShape.hpp:
 
-/usr/include/c++/13/tr1/riemann_zeta.tcc:
+/usr/include/SFML/System.hpp:
 
-/usr/include/c++/13/tr1/legendre_function.tcc:
+/usr/include/SFML/Graphics/Color.hpp:
 
-/usr/include/SFML/Window/GlResource.hpp:
+/usr/include/SFML/Graphics/CircleShape.hpp:
 
-/usr/include/c++/13/type_traits:
+/usr/include/SFML/Graphics/BlendMode.hpp:
 
-/usr/include/SFML/Window/Context.hpp:
-
-/usr/include/x86_64-linux-gnu/sys/single_threaded.h:
-
-/usr/include/c++/13/tr1/gamma.tcc:
-
-/usr/include/SFML/Window/Clipboard.hpp:
-
-/usr/include/c++/13/cctype:
-
-/usr/include/c++/13/tr1/ell_integral.tcc:
-
-/usr/include/c++/13/tr1/exp_integral.tcc:
+/usr/include/c++/13/system_error:
 
 /usr/include/c++/13/pstl/pstl_config.h:
-
-/usr/include/features-time64.h:
-
-/usr/include/x86_64-linux-gnu/bits/struct_rwlock.h:
 
 /usr/include/SFML/System/Err.hpp:
 
@@ -2344,25 +2344,25 @@ CMakeFiles/TraficSimulator.dir/src/main.cpp.o: /home/psvoboda@qres.local/Documen
 
 /usr/include/c++/13/pstl/execution_defs.h:
 
+/usr/include/c++/13/bits/basic_ios.tcc:
+
 /usr/include/x86_64-linux-gnu/c++/13/bits/gthr.h:
 
-/home/psvoboda@qres.local/Documents/GitHub/TraficSimulator/TraficSimulator/src/TrafficLight.cpp:
+/usr/include/x86_64-linux-gnu/bits/struct_rwlock.h:
 
-/usr/include/c++/13/tr1/bessel_function.tcc:
+/usr/include/c++/13/istream:
 
-/usr/include/c++/13/initializer_list:
+/usr/include/c++/13/iostream:
 
 /usr/include/c++/13/ext/type_traits.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/sigset_t.h:
 
-/usr/include/errno.h:
+/usr/include/SFML/Window/Clipboard.hpp:
 
-/usr/include/c++/13/bits/functional_hash.h:
+/usr/include/c++/13/cctype:
 
-/usr/include/SFML/Graphics/RenderTarget.hpp:
-
-/usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h:
+/usr/include/c++/13/tr1/gamma.tcc:
 
 /usr/include/c++/13/debug/assertions.h:
 
@@ -2374,15 +2374,23 @@ CMakeFiles/TraficSimulator.dir/src/main.cpp.o: /home/psvoboda@qres.local/Documen
 
 /usr/include/c++/13/cstdio:
 
-/usr/include/c++/13/vector:
+/usr/include/SFML/Graphics/PrimitiveType.hpp:
+
+/usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h:
 
 /usr/include/c++/13/cstddef:
 
 /usr/include/c++/13/bits/stl_algo.h:
 
+/usr/include/c++/13/ostream:
+
+/usr/include/c++/13/tr1/riemann_zeta.tcc:
+
 /usr/include/c++/13/cmath:
 
-/usr/include/SFML/Graphics/Rect.inl:
+/usr/include/x86_64-linux-gnu/c++/13/bits/error_constants.h:
 
 /usr/include/c++/13/clocale:
 
@@ -2394,17 +2402,11 @@ CMakeFiles/TraficSimulator.dir/src/main.cpp.o: /home/psvoboda@qres.local/Documen
 
 /usr/include/x86_64-linux-gnu/bits/stdint-least.h:
 
-/usr/include/SFML/Graphics/Rect.hpp:
-
 /usr/include/c++/13/bits/vector.tcc:
 
-/usr/include/SFML/Graphics/View.hpp:
-
-/usr/include/SFML/Graphics/Transformable.hpp:
+/usr/include/c++/13/bits/stl_function.h:
 
 /usr/include/c++/13/tr1/beta_function.tcc:
-
-/usr/include/c++/13/bits/stl_function.h:
 
 /usr/include/c++/13/pstl/glue_memory_defs.h:
 
@@ -2440,12 +2442,6 @@ CMakeFiles/TraficSimulator.dir/src/main.cpp.o: /home/psvoboda@qres.local/Documen
 
 /usr/include/x86_64-linux-gnu/c++/13/bits/c++allocator.h:
 
-/usr/include/SFML/Graphics/Vertex.hpp:
-
-/usr/include/c++/13/bits/stl_vector.h:
-
-/usr/include/c++/13/bits/stl_tempbuf.h:
-
 /usr/include/c++/13/bits/functexcept.h:
 
 /usr/include/x86_64-linux-gnu/bits/libc-header-start.h:
@@ -2458,15 +2454,47 @@ CMakeFiles/TraficSimulator.dir/src/main.cpp.o: /home/psvoboda@qres.local/Documen
 
 /usr/include/c++/13/ext/alloc_traits.h:
 
-/usr/include/c++/13/utility:
+/usr/include/c++/13/bits/stl_construct.h:
 
-/usr/include/c++/13/bits/stl_heap.h:
+/usr/include/c++/13/bits/stl_bvector.h:
 
-/usr/include/x86_64-linux-gnu/c++/13/bits/ctype_inline.h:
+/usr/include/c++/13/bits/allocator.h:
 
-/usr/include/c++/13/bits/char_traits.h:
+/usr/include/c++/13/bits/shared_ptr_atomic.h:
 
-/usr/include/x86_64-linux-gnu/bits/types/clock_t.h:
+/home/psvoboda@qres.local/Documents/GitHub/TraficSimulator/TraficSimulator/src/RoadSign.cpp:
+
+/home/psvoboda@qres.local/Documents/GitHub/TraficSimulator/TraficSimulator/src/TrafficTypes.h:
+
+/usr/include/c++/13/bits/stringfwd.h:
+
+/usr/include/c++/13/bits/shared_ptr.h:
+
+/usr/include/SFML/Window/Export.hpp:
+
+/usr/include/x86_64-linux-gnu/bits/struct_mutex.h:
+
+/usr/include/x86_64-linux-gnu/bits/thread-shared-types.h:
+
+/usr/include/c++/13/bits/string_view.tcc:
+
+/usr/include/c++/13/bits/locale_facets.tcc:
+
+/usr/include/c++/13/bits/streambuf.tcc:
+
+/usr/include/c++/13/bits/specfun.h:
+
+/usr/include/c++/13/bits/basic_string.h:
+
+/usr/include/c++/13/tr1/poly_laguerre.tcc:
+
+/usr/include/x86_64-linux-gnu/bits/endianness.h:
+
+/usr/include/c++/13/bits/stl_algobase.h:
+
+/home/psvoboda@qres.local/Documents/GitHub/TraficSimulator/TraficSimulator/src/TrafficLight.h:
+
+/usr/include/c++/13/bits/locale_facets.h:
 
 /usr/include/c++/13/ext/aligned_buffer.h:
 
@@ -2476,15 +2504,23 @@ CMakeFiles/TraficSimulator.dir/src/main.cpp.o: /home/psvoboda@qres.local/Documen
 
 /usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h:
 
-/usr/include/SFML/Graphics/Export.hpp:
-
-/usr/include/SFML/Graphics/Sprite.hpp:
-
 /usr/include/c++/13/bits/alloc_traits.h:
 
 /usr/include/x86_64-linux-gnu/bits/fp-logb.h:
 
 /home/psvoboda@qres.local/Documents/GitHub/TraficSimulator/TraficSimulator/src/Graphics.h:
+
+/usr/include/c++/13/ios:
+
+/home/psvoboda@qres.local/Documents/GitHub/TraficSimulator/TraficSimulator/src/TrafficLight.cpp:
+
+/usr/include/c++/13/initializer_list:
+
+/usr/include/c++/13/tr1/bessel_function.tcc:
+
+/usr/include/c++/13/bits/basic_ios.h:
+
+/usr/include/x86_64-linux-gnu/bits/time64.h:
 
 /usr/include/c++/13/bits/allocated_ptr.h:
 
@@ -2492,57 +2528,25 @@ CMakeFiles/TraficSimulator.dir/src/main.cpp.o: /home/psvoboda@qres.local/Documen
 
 /usr/include/c++/13/bits/basic_string.tcc:
 
-/usr/include/c++/13/bits/stringfwd.h:
-
 /usr/include/c++/13/backward/binders.h:
-
-/usr/include/c++/13/tr1/special_function_util.h:
-
-/usr/include/stdc-predef.h:
-
-/usr/include/c++/13/bits/allocator.h:
-
-/usr/include/c++/13/bits/stl_bvector.h:
 
 /usr/include/c++/13/bits/concept_check.h:
 
 /home/psvoboda@qres.local/Documents/GitHub/TraficSimulator/TraficSimulator/src/Car.cpp:
 
-/usr/include/features.h:
-
-/usr/include/c++/13/tr1/modified_bessel_func.tcc:
+/usr/include/c++/13/backward/auto_ptr.h:
 
 /usr/include/x86_64-linux-gnu/c++/13/bits/time_members.h:
 
 /home/psvoboda@qres.local/Documents/GitHub/TraficSimulator/TraficSimulator/src/Vector2D.h:
 
-/usr/include/c++/13/backward/auto_ptr.h:
-
 /usr/include/c++/13/ext/string_conversions.h:
-
-/home/psvoboda@qres.local/Documents/GitHub/TraficSimulator/TraficSimulator/src/RoadSign.cpp:
-
-/home/psvoboda@qres.local/Documents/GitHub/TraficSimulator/TraficSimulator/src/TrafficTypes.h:
-
-/usr/include/c++/13/bits/shared_ptr_atomic.h:
 
 /home/psvoboda@qres.local/Documents/GitHub/TraficSimulator/TraficSimulator/src/Simulation.h:
 
 /usr/include/c++/13/bits/refwrap.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/__fpos_t.h:
-
-/usr/include/c++/13/bits/cpp_type_traits.h:
-
-/usr/include/c++/13/string:
-
-/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:
-
-/usr/include/x86_64-linux-gnu/bits/types.h:
-
-/usr/include/c++/13/bits/move.h:
-
-/usr/include/SFML/Graphics/RenderWindow.hpp:
 
 /home/psvoboda@qres.local/Documents/GitHub/TraficSimulator/TraficSimulator/src/Crossroad.h:
 
@@ -2551,6 +2555,10 @@ CMakeFiles/TraficSimulator.dir/src/main.cpp.o: /home/psvoboda@qres.local/Documen
 /usr/include/x86_64-linux-gnu/bits/stdlib-float.h:
 
 /usr/include/x86_64-linux-gnu/bits/uintn-identity.h:
+
+/usr/include/c++/13/bits/functional_hash.h:
+
+/usr/include/errno.h:
 
 /usr/include/c++/13/bits/uses_allocator_args.h:
 
@@ -2572,13 +2580,13 @@ CMakeFiles/TraficSimulator.dir/src/main.cpp.o: /home/psvoboda@qres.local/Documen
 
 /usr/include/c++/13/tr1/poly_hermite.tcc:
 
-/usr/include/c++/13/tr1/poly_laguerre.tcc:
+/usr/include/c++/13/bits/stl_vector.h:
 
-/usr/include/c++/13/bits/basic_string.h:
+/usr/include/c++/13/bits/stl_tempbuf.h:
 
-/usr/include/x86_64-linux-gnu/bits/endianness.h:
+/usr/include/x86_64-linux-gnu/bits/types/clockid_t.h:
 
-/usr/include/c++/13/bits/cxxabi_forced.h:
+/usr/include/x86_64-linux-gnu/bits/types/struct___jmp_buf_tag.h:
 
 /usr/include/c++/13/bits/atomic_lockfree_defines.h:
 
@@ -2602,6 +2610,8 @@ CMakeFiles/TraficSimulator.dir/src/main.cpp.o: /home/psvoboda@qres.local/Documen
 
 /usr/include/c++/13/algorithm:
 
+/usr/include/features-time64.h:
+
 /usr/include/c++/13/bits/hash_bytes.h:
 
 /usr/include/x86_64-linux-gnu/bits/math-vector.h:
@@ -2614,35 +2624,69 @@ CMakeFiles/TraficSimulator.dir/src/main.cpp.o: /home/psvoboda@qres.local/Documen
 
 /usr/include/c++/13/bits/predefined_ops.h:
 
+/usr/include/c++/13/cwctype:
+
 /usr/include/alloca.h:
 
+/usr/include/SFML/Graphics/Text.hpp:
+
+/usr/include/c++/13/bits/ptr_traits.h:
+
+/usr/include/SFML/Graphics/Texture.hpp:
+
+/usr/include/x86_64-linux-gnu/c++/13/bits/c++locale.h:
+
 /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h:
+
+/usr/include/c++/13/bits/cpp_type_traits.h:
+
+/usr/include/c++/13/string:
+
+/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:
+
+/usr/include/x86_64-linux-gnu/bits/types.h:
+
+/usr/include/c++/13/bits/move.h:
+
+/usr/include/c++/13/bits/cxxabi_forced.h:
+
+/usr/include/SFML/Graphics.hpp:
+
+/usr/include/c++/13/bits/localefwd.h:
 
 /usr/include/c++/13/bits/streambuf_iterator.h:
 
 /usr/include/x86_64-linux-gnu/bits/flt-eval-method.h:
 
-/usr/include/x86_64-linux-gnu/bits/waitstatus.h:
+/usr/include/c++/13/bits/cxxabi_init_exception.h:
 
-/usr/include/c++/13/bits/exception_defines.h:
-
-/usr/include/SFML/Graphics/ConvexShape.hpp:
+/usr/include/c++/13/typeinfo:
 
 /usr/include/c++/13/bits/exception_ptr.h:
 
-/usr/include/SFML/System/Vector2.inl:
+/usr/include/c++/13/bits/locale_conv.h:
 
-/usr/include/SFML/System/Thread.inl:
+/usr/include/c++/13/bits/istream.tcc:
 
-/usr/include/c++/13/tuple:
+/usr/include/c++/13/iterator:
 
-/usr/include/c++/13/bits/nested_exception.h:
+/usr/include/c++/13/bits/ios_base.h:
 
-/usr/include/c++/13/bits/shared_ptr.h:
+/usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h:
 
-/usr/include/SFML/Window/Export.hpp:
+/usr/include/c++/13/bits/ostream.tcc:
 
-/usr/include/x86_64-linux-gnu/bits/struct_mutex.h:
+/usr/include/x86_64-linux-gnu/bits/types/clock_t.h:
+
+/usr/include/c++/13/bits/stl_relops.h:
+
+/usr/include/x86_64-linux-gnu/bits/mathcalls.h:
+
+/usr/include/SFML/Graphics/Glsl.inl:
+
+/usr/include/c++/13/bits/uniform_int_dist.h:
+
+/usr/include/c++/13/bits/locale_classes.tcc:
 
 /usr/include/c++/13/bits/invoke.h:
 
@@ -2654,39 +2698,63 @@ CMakeFiles/TraficSimulator.dir/src/main.cpp.o: /home/psvoboda@qres.local/Documen
 
 /usr/include/wchar.h:
 
-/usr/include/SFML/Graphics/RenderStates.hpp:
-
 /usr/include/c++/13/bits/memoryfwd.h:
 
 /home/psvoboda@qres.local/Documents/GitHub/TraficSimulator/TraficSimulator/src/Vector2D.cpp:
 
 /usr/include/c++/13/bits/ostream_insert.h:
 
-/usr/include/c++/13/bits/streambuf.tcc:
+/usr/include/SFML/System/NonCopyable.hpp:
 
-/usr/include/c++/13/bits/specfun.h:
+/usr/include/c++/13/stdexcept:
 
-/usr/include/c++/13/tr1/hypergeometric.tcc:
+/usr/include/c++/13/tr1/ell_integral.tcc:
+
+/usr/include/c++/13/tr1/exp_integral.tcc:
 
 /usr/include/c++/13/bits/range_access.h:
 
-/usr/include/c++/13/bits/string_view.tcc:
+/usr/include/c++/13/tr1/hypergeometric.tcc:
 
-/usr/include/x86_64-linux-gnu/bits/thread-shared-types.h:
+/usr/include/SFML/Window/GlResource.hpp:
 
-/usr/include/c++/13/bits/localefwd.h:
+/usr/include/c++/13/type_traits:
 
-/usr/include/SFML/Graphics.hpp:
+/usr/include/SFML/Window/Context.hpp:
 
-/home/psvoboda@qres.local/Documents/GitHub/TraficSimulator/TraficSimulator/src/TrafficLight.h:
+/usr/include/x86_64-linux-gnu/sys/single_threaded.h:
 
-/usr/include/x86_64-linux-gnu/c++/13/bits/c++locale.h:
+/usr/include/c++/13/tr1/legendre_function.tcc:
 
-/usr/include/SFML/Graphics/Texture.hpp:
+/usr/include/c++/13/tr1/modified_bessel_func.tcc:
 
-/usr/include/c++/13/bits/stl_algobase.h:
+/usr/include/c++/13/bits/exception_defines.h:
 
-/usr/include/c++/13/bits/stl_construct.h:
+/usr/include/x86_64-linux-gnu/bits/waitstatus.h:
+
+/usr/include/c++/13/tr1/special_function_util.h:
+
+/usr/include/stdc-predef.h:
+
+/usr/include/SFML/System/Vector2.inl:
+
+/usr/include/SFML/System/Thread.inl:
+
+/usr/include/c++/13/bits/nested_exception.h:
+
+/usr/include/c++/13/tuple:
+
+/usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h:
+
+/usr/include/c++/13/bits/stl_heap.h:
+
+/usr/include/c++/13/utility:
+
+/usr/include/c++/13/vector:
+
+/usr/include/ctype.h:
+
+/usr/include/features.h:
 
 /usr/include/c++/13/debug/debug.h:
 
@@ -2700,9 +2768,9 @@ CMakeFiles/TraficSimulator.dir/src/main.cpp.o: /home/psvoboda@qres.local/Documen
 
 /usr/include/sched.h:
 
-/home/psvoboda@qres.local/Documents/GitHub/TraficSimulator/TraficSimulator/src/Route.h:
-
 /usr/include/endian.h:
+
+/home/psvoboda@qres.local/Documents/GitHub/TraficSimulator/TraficSimulator/src/Route.h:
 
 /usr/include/stdint.h:
 
@@ -2715,8 +2783,6 @@ CMakeFiles/TraficSimulator.dir/src/main.cpp.o: /home/psvoboda@qres.local/Documen
 /usr/include/x86_64-linux-gnu/bits/atomic_wide_counter.h:
 
 /usr/include/x86_64-linux-gnu/bits/cpu-set.h:
-
-/usr/include/SFML/Graphics/CircleShape.hpp:
 
 /usr/include/x86_64-linux-gnu/bits/endian.h:
 
@@ -2734,25 +2800,13 @@ CMakeFiles/TraficSimulator.dir/src/main.cpp.o: /home/psvoboda@qres.local/Documen
 
 /usr/include/x86_64-linux-gnu/bits/fp-fast.h:
 
-/usr/include/SFML/Graphics/Drawable.hpp:
-
 /usr/include/c++/13/map:
 
 /usr/include/c++/13/string_view:
 
 /usr/include/x86_64-linux-gnu/bits/iscanonical.h:
 
-/usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h:
-
-/usr/include/SFML/Graphics/PrimitiveType.hpp:
-
-/usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h:
-
 /usr/include/x86_64-linux-gnu/bits/locale.h:
-
-/usr/include/c++/13/bits/stl_relops.h:
-
-/usr/include/x86_64-linux-gnu/bits/mathcalls.h:
 
 /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h:
 
@@ -2771,8 +2825,6 @@ CMakeFiles/TraficSimulator.dir/src/main.cpp.o: /home/psvoboda@qres.local/Documen
 /usr/include/x86_64-linux-gnu/bits/select.h:
 
 /usr/include/x86_64-linux-gnu/bits/time.h:
-
-/usr/include/x86_64-linux-gnu/bits/time64.h:
 
 /usr/include/c++/13/bits/locale_classes.h:
 
@@ -2806,10 +2858,6 @@ CMakeFiles/TraficSimulator.dir/src/main.cpp.o: /home/psvoboda@qres.local/Documen
 
 /home/psvoboda@qres.local/Documents/GitHub/TraficSimulator/TraficSimulator/src/Crossroad.cpp:
 
-/usr/include/x86_64-linux-gnu/bits/types/struct___jmp_buf_tag.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/clockid_t.h:
-
 /usr/include/SFML/Graphics/VertexArray.hpp:
 
 /usr/include/x86_64-linux-gnu/bits/types/cookie_io_functions_t.h:
@@ -2817,6 +2865,8 @@ CMakeFiles/TraficSimulator.dir/src/main.cpp.o: /home/psvoboda@qres.local/Documen
 /usr/include/x86_64-linux-gnu/bits/wchar.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/locale_t.h:
+
+/usr/include/x86_64-linux-gnu/bits/wctype-wchar.h:
 
 /usr/include/asm-generic/errno.h:
 
@@ -2836,11 +2886,17 @@ CMakeFiles/TraficSimulator.dir/src/main.cpp.o: /home/psvoboda@qres.local/Documen
 
 /usr/include/x86_64-linux-gnu/c++/13/bits/atomic_word.h:
 
-/usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h:
+/usr/include/SFML/System/InputStream.hpp:
 
-/usr/include/x86_64-linux-gnu/bits/types/struct_timespec.h:
+/usr/include/x86_64-linux-gnu/c++/13/bits/ctype_base.h:
+
+/usr/include/c++/13/bits/char_traits.h:
+
+/usr/include/x86_64-linux-gnu/c++/13/bits/ctype_inline.h:
 
 /usr/include/SFML/Graphics/RectangleShape.hpp:
+
+/usr/include/x86_64-linux-gnu/bits/types/struct_timespec.h:
 
 /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h:
 
@@ -2860,32 +2916,4 @@ CMakeFiles/TraficSimulator.dir/src/main.cpp.o: /home/psvoboda@qres.local/Documen
 
 /usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h:
 
-/usr/include/c++/13/bits/ptr_traits.h:
-
-/usr/include/SFML/Graphics/Text.hpp:
-
 /usr/include/SFML/Config.hpp:
-
-/usr/include/SFML/Graphics/BlendMode.hpp:
-
-/usr/include/SFML/System.hpp:
-
-/usr/include/SFML/Graphics/Color.hpp:
-
-/usr/include/c++/13/bits/locale_facets_nonio.tcc:
-
-/usr/include/SFML/Graphics/Glsl.hpp:
-
-/usr/include/c++/13/bits/locale_classes.tcc:
-
-/usr/include/c++/13/bits/uniform_int_dist.h:
-
-/usr/include/SFML/Graphics/Glsl.inl:
-
-/usr/include/SFML/Graphics/Image.hpp:
-
-/usr/include/SFML/Graphics/RenderTexture.hpp:
-
-/usr/include/SFML/Graphics/Shader.hpp:
-
-/usr/include/SFML/Graphics/Shape.hpp:
