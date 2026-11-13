@@ -345,6 +345,30 @@ src/Vector2D.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TraficSimulator.dir/build.make CMakeFiles/TraficSimulator.dir/src/Vector2D.cpp.s
 .PHONY : src/Vector2D.cpp.s
 
+src/generatingWorld.o: src/generatingWorld.cpp.o
+.PHONY : src/generatingWorld.o
+
+# target to build an object file
+src/generatingWorld.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TraficSimulator.dir/build.make CMakeFiles/TraficSimulator.dir/src/generatingWorld.cpp.o
+.PHONY : src/generatingWorld.cpp.o
+
+src/generatingWorld.i: src/generatingWorld.cpp.i
+.PHONY : src/generatingWorld.i
+
+# target to preprocess a source file
+src/generatingWorld.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TraficSimulator.dir/build.make CMakeFiles/TraficSimulator.dir/src/generatingWorld.cpp.i
+.PHONY : src/generatingWorld.cpp.i
+
+src/generatingWorld.s: src/generatingWorld.cpp.s
+.PHONY : src/generatingWorld.s
+
+# target to generate assembly for a file
+src/generatingWorld.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TraficSimulator.dir/build.make CMakeFiles/TraficSimulator.dir/src/generatingWorld.cpp.s
+.PHONY : src/generatingWorld.cpp.s
+
 src/main.o: src/main.cpp.o
 .PHONY : src/main.o
 
@@ -405,6 +429,9 @@ help:
 	@echo "... src/Vector2D.o"
 	@echo "... src/Vector2D.i"
 	@echo "... src/Vector2D.s"
+	@echo "... src/generatingWorld.o"
+	@echo "... src/generatingWorld.i"
+	@echo "... src/generatingWorld.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

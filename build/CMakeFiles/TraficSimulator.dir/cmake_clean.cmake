@@ -17,6 +17,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/TraficSimulator.dir/src/TrafficLight.cpp.o.d"
   "CMakeFiles/TraficSimulator.dir/src/Vector2D.cpp.o"
   "CMakeFiles/TraficSimulator.dir/src/Vector2D.cpp.o.d"
+  "CMakeFiles/TraficSimulator.dir/src/generatingWorld.cpp.o"
+  "CMakeFiles/TraficSimulator.dir/src/generatingWorld.cpp.o.d"
   "CMakeFiles/TraficSimulator.dir/src/main.cpp.o"
   "CMakeFiles/TraficSimulator.dir/src/main.cpp.o.d"
   "TraficSimulator"

@@ -65,8 +65,7 @@ Vector2D Car::getWorldPosition() const
 
     constexpr double laneWidth = 10.0;
 
-    const double laneOffset =
-        (static_cast<double>(laneIndex_) - 0.5) * laneWidth;
+    const double laneOffset = laneWidth / 2.0;
 
     worldPosition = worldPosition + right * laneOffset;
 
@@ -158,6 +157,10 @@ void Car::setBrakeDeceleration(double deceleration) {
     brakeDeceleration_ = std::max(0.0, deceleration);
 }
 
+sf::Color& Car::getColor(){
+    return color_;
+}
+
 void Car::setDirection(Direction direction) {
     direction_ = direction;
 }
@@ -247,6 +250,7 @@ void Car::moveToNextRoad()
     Road* previousRoad = currentRoad_;
     const bool forward = isTravellingForward();
 
+    // Determine the crossroad we have reached.
     Crossroad* reachedCrossroad =
         forward ? previousRoad->getEnd()
                 : previousRoad->getStart();
@@ -259,57 +263,88 @@ void Car::moveToNextRoad()
     }
 
     std::cout << "Car " << id_
-              << " reached crossroad " << reachedCrossroad->getId()
-              << " from road " << previousRoad->getId() << '\n';
+              << " reached crossroad "
+              << reachedCrossroad->getId()
+              << " from road "
+              << previousRoad->getId() << '\n';
 
-    // The route determines which road the car should take next.
-    Road* nextRoad = route_ ? route_->getNextRoad() : nullptr;
+    // Find roads connected to this crossroad.
+    const auto& connectedRoads = reachedCrossroad->getRoads();
 
-    // Verify that the requested road actually connects to this crossroad.
-    if (nextRoad &&
-        (nextRoad == previousRoad ||
-         (nextRoad->getStart() != reachedCrossroad &&
-          nextRoad->getEnd() != reachedCrossroad)))
+    std::vector<Road*> availableRoads;
+
+    // Prefer a road other than the one we just came from.
+    for (Road* road : connectedRoads)
     {
-        std::cout << "Invalid next road in route for car "
-                  << id_ << '\n';
-
-        nextRoad = nullptr;
+        if (road != nullptr && road != previousRoad)
+        {
+            availableRoads.push_back(road);
+        }
     }
 
-    // Don't arbitrarily choose a different road if the route is invalid.
-    if (!nextRoad)
-    {
-        std::cout << "Car " << id_
-                  << " has no valid next road at crossroad "
-                  << reachedCrossroad->getId() << '\n';
+    Road* nextRoad = nullptr;
 
-        speed_ = 0.0;
-        stopped_ = true;
-        return;
+    if (!availableRoads.empty())
+    {
+        // Randomly choose one of the available roads.
+        const std::size_t index =
+            static_cast<std::size_t>(std::rand())
+            % availableRoads.size();
+
+        nextRoad = availableRoads[index];
+    }
+    else
+    {
+        // No alternative road exists: turn around.
+        nextRoad = previousRoad;
+
+        std::cout << "Car " << id_
+                  << " is turning around at crossroad "
+                  << reachedCrossroad->getId() << '\n';
     }
 
     // Remove the car from its previous road.
     previousRoad->removeCar(id_);
 
-    // Enter the new road from the endpoint connected to the crossroad.
+    // Enter the selected road.
     currentRoad_ = nextRoad;
 
+    // Determine the entry endpoint and select the corresponding lane.
     if (nextRoad->getStart() == reachedCrossroad)
     {
-        laneIndex_ = 0; // Start -> end
+        // Enter at the start and travel toward the end.
+        laneIndex_ = 0;
+    }
+    else if (nextRoad->getEnd() == reachedCrossroad)
+    {
+        // Enter at the end and travel toward the start.
+        laneIndex_ = 1;
     }
     else
     {
-        laneIndex_ = 1; // End -> start
+        // Safety check: the selected road must connect here.
+        currentRoad_ = previousRoad;
+        previousRoad->addCar(shared_from_this());
+
+        speed_ = 0.0;
+        stopped_ = true;
+
+        std::cout << "Error: selected road does not connect "
+                  << "to crossroad "
+                  << reachedCrossroad->getId() << '\n';
+
+        return;
     }
 
+    // The car starts at the entry end of the new road.
     roadPosition_ = 0.0;
     position_ = reachedCrossroad->getPosition();
 
+    // Register the car on its new road.
     nextRoad->addCar(shared_from_this());
 
-    route_->advance();
+    // We no longer need the pre-generated route to select roads.
+    // Do not call route_->advance() here.
 
     stopped_ = false;
 
@@ -317,7 +352,8 @@ void Car::moveToNextRoad()
 
     std::cout << "Car " << id_
               << " entered road " << nextRoad->getId()
-              << " from crossroad " << reachedCrossroad->getId()
+              << " from crossroad "
+              << reachedCrossroad->getId()
               << ", lane " << laneIndex_
               << ", world position ("
               << worldPosition.x << ", "

@@ -22,6 +22,7 @@ public:
     void drawRoad(const Vector2D& start, const Vector2D& end);
     void drawCrossroad(const Vector2D& position);
     void drawCar(const Car* car);
+    void drawCars(Graphics& graphics) const;
     
     sf::RenderWindow& getWindow();
 

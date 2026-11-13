@@ -20,7 +20,7 @@ public:
 private:
     void updateTrafficLights(double deltaTime);
     void updateCars(double deltaTime);
-    void applySimpleCarFollowing(Car& car);
+    void applySimpleCarFollowing(Car& car, double deltaTime);
 
     std::vector<std::shared_ptr<Car>> cars_;
     std::vector<std::shared_ptr<Road>> roads_;

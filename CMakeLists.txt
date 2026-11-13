@@ -18,6 +18,7 @@ add_executable(TraficSimulator
     src/Route.cpp
     src/Simulation.cpp
     src/Graphics.cpp
+    src/generatingWorld.cpp
 )
 
 target_include_directories(TraficSimulator PRIVATE src)

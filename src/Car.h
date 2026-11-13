@@ -2,10 +2,12 @@
 
 #include "Vector2D.h"
 #include "TrafficTypes.h"
+#include "Graphics.h"
 #include <memory>
 
 class Road;
 class Route;
+
 
 class Car : public std::enable_shared_from_this<Car>
 {
@@ -49,6 +51,9 @@ public:
     double getBrakeDeceleration() const;
     void setBrakeDeceleration(double deceleration);
 
+    sf::Color getColor() const;
+    void setColor(const sf::Color& newColor);
+
     Direction getDirection() const;
     void setDirection(Direction direction);
 
@@ -81,7 +86,7 @@ private:
     double maxSpeed_ = 0.0;
     double acceleration_ = 0.0;
     double brakeDeceleration_ = 5.0;
-
+    sf::Color color_ = sf::Color::Black;
     bool stopped_ = false;
 
         std::shared_ptr<Route> route_;

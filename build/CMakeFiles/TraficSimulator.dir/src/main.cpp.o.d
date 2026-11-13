@@ -282,4 +282,5 @@ CMakeFiles/TraficSimulator.dir/src/main.cpp.o: \
  /home/psvoboda@qres.local/Documents/GitHub/TraficSimulator/TraficSimulator/src/Crossroad.h \
  /home/psvoboda@qres.local/Documents/GitHub/TraficSimulator/TraficSimulator/src/TrafficLight.h \
  /home/psvoboda@qres.local/Documents/GitHub/TraficSimulator/TraficSimulator/src/Car.h \
- /home/psvoboda@qres.local/Documents/GitHub/TraficSimulator/TraficSimulator/src/Simulation.h
+ /home/psvoboda@qres.local/Documents/GitHub/TraficSimulator/TraficSimulator/src/Simulation.h \
+ /home/psvoboda@qres.local/Documents/GitHub/TraficSimulator/TraficSimulator/src/generatingWorld.h

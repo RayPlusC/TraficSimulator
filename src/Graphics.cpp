@@ -182,7 +182,7 @@ void Graphics::drawCar(const Car* car)
 
     const Vector2D position = car->getWorldPosition();
     const Direction direction = car->getDirection();
-
+    
     float width = 10.0f;
     float height = 5.0f;
 
@@ -194,7 +194,7 @@ void Graphics::drawCar(const Car* car)
 
     sf::RectangleShape shape(sf::Vector2f(width, height));
 
-    shape.setFillColor(sf::Color::Red);
+    shape.setFillColor(sf::Color::Black);
     shape.setOrigin(width / 2.0f, height / 2.0f);
     shape.setPosition(
         static_cast<float>(position.x),

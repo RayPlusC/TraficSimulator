@@ -49,8 +49,9 @@ void Simulation::updateTrafficLights(double deltaTime) {
     }
 }
 
-void Simulation::applySimpleCarFollowing(Car& car) {
+void Simulation::applySimpleCarFollowing(Car& car, double deltaTime) {
     Road* road = car.getCurrentRoad();
+
     if (!road) {
         return;
     }
@@ -74,12 +75,11 @@ void Simulation::applySimpleCarFollowing(Car& car) {
         }
     }
 
-    // Keep approximately 5 m of space.
     if (closestDistance < 15.0) {
-        car.brake(0.2);
+        car.brake(deltaTime);
     } else {
         car.start();
-        car.accelerate(0.2);
+        car.accelerate(deltaTime);
     }
 }
 
@@ -89,7 +89,7 @@ void Simulation::updateCars(double deltaTime) {
             continue;
         }
 
-        applySimpleCarFollowing(*car);
+        applySimpleCarFollowing(*car, deltaTime);
         car->update(deltaTime);
     }
 }
